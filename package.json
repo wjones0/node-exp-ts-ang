@@ -1,6 +1,6 @@
 {
-  "name": "node-express-typescript",
-  "description": "node-express-typescript Sample Application (TypeScript)",
+  "name": "node-exp-ts-ang",
+  "description": "node-express-typescript-angular authentication Sample Application (TypeScript)",
   "version": "0.0.0",
   "private": true,
   "scripts": {
