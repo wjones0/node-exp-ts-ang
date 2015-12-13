@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html ng-app="app">
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    
+	
+	
+	<style>
+        body        { padding-top:80px; }
+    </style>
+	
+</head>
+
+<body>
+	<div class="container" ng-view>
+
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+
+    <script src="/common/httpInterceptor.module.js"></script>
+    <script src="/common/common-directives.module.js"></script>
+    <script src="/common/growl.module.js"></script>
+    
+    <script src="/login/login.module.js"></script>
+    <script src="/login/index.controller.js"></script>
+    <script src="/login/login.controller.js"></script>
+    <script src="/login/signup.controller.js"></script>
+    <script src="/login/LoginForm.controller.js"></script>
+    <script src="/login/SignupForm.controller.js"></script>
+
+    <script src="/profile/profile.module.js"></script>
+    <script src="/profile/profile.controller.js"></script>
+    <script src="/profile/secondarySignup.controller.js"></script>
+
+    <script src="/app.module.js"></script>
+
+</body>
+</html>

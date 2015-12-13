@@ -24,6 +24,16 @@ gulp.task('views', function () {
     .pipe(gulp.dest('./build/views')); 
 });
 
+gulp.task('publichtml', function () {
+    return gulp.src('./src/public/**/*.html')
+        .pipe(gulp.dest('./build/public'));
+});
+
+gulp.task('copyJS', function () {
+    return gulp.src('./src/public/**/*.js')
+        .pipe(gulp.dest('./build/public'));
+});
+
 // run mocha tests in the ./tests folder
 gulp.task('test', function () {
 
@@ -38,7 +48,7 @@ gulp.task('browser-sync', ['nodemon', 'watch'], function () {
         proxy: "http://localhost:3000",
         files: ["build/public/**/*.*", "build/views/**/*.*"],
         browser: "google chrome",
-        port: 7000,
+        port: 8080,
     });
 });
 
@@ -66,9 +76,18 @@ gulp.task('nodemon', function (cb) {
 // TypeScript build for /src folder, pipes in .d.ts files from typings folder 
 var tsConfigSrc = tsb.create('src/tsconfig.json');
 gulp.task('build', function () {
-    return gulp.src(['typings/**/*.ts', 'src/**/*.ts'])
+    return gulp.src(['typings/**/*.ts', 'src/**/*.ts', 'src/**/**/*.ts'])
         .pipe(tsConfigSrc()) 
         .pipe(gulp.dest('build'));
+});
+
+// TypeScript build for /config folder
+var tsConfigConfig = tsb.create('src/tsconfig.json');
+gulp.task('buildConfig', function () {
+    // pipe in all necessary files
+    return gulp.src(['config/*.ts'])
+        .pipe(tsConfigConfig()) 
+        .pipe(gulp.dest('config'));
 });
 
 // TypeScript build for /tests folder, pipes in .d.ts files from typings folder
@@ -85,9 +104,12 @@ gulp.task('buildTests', function () {
 // if a file change is detected, run the TypeScript or LESS compile gulp tasks
 gulp.task('watch', function () {
     gulp.watch('src/**/*.ts', ['build']);
+    gulp.watch('src/**/**/*.ts', ['build']);
+    gulp.watch('config/*.ts', ['buildConfig']);
     gulp.watch('tests/**/*.ts', ['buildTests']);
     gulp.watch('src/styles/**/*.less', ['less']);
+    gulp.watch('src/public/**/*.html', ['publichtml']);
 }); 
 
-gulp.task('buildAll', ['build', 'buildTests', 'less', 'views']);
+gulp.task('buildAll', ['build', 'buildConfig', 'buildTests', 'less', 'views', 'publichtml', 'copyJS']);
 gulp.task('default', ['browser-sync']);
