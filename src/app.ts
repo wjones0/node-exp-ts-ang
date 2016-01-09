@@ -11,7 +11,7 @@ import path = require('path');
 import * as appAuthConfig from '../config/config';
 
 import * as passport from 'passport';
-import * as passportAuth from './config/passport';
+import * as passportAuth from './appconfig/passport';
 
 
 const app: express.Express = express();
